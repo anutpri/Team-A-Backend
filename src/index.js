@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import User from '../models/user.schema.js';
+import { connectDB } from "../config/database.js";
 
 const webServer = express();
 webServer.use(cors());
@@ -7,6 +9,7 @@ webServer.use(express.json());
 
 const ipAddress = "127.0.0.1";
 const port = 3000;
+connectDB();
 
 const user = [];
 
