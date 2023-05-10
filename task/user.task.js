@@ -1,10 +1,14 @@
 import User from '../models/user.schema.js';
 
 export async function getUser() {
-    const userData = await User.find({}).exec();
-    return userData;
-}
-
+    try {
+        const userData = await User.find({}).exec();
+        return userData;
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    
 export async function createUser(User) {
 
 }

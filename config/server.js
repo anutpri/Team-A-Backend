@@ -20,4 +20,4 @@ async function connectServer() {
   
   }
   
-  export {connectServer};
+  export default connectServer;
