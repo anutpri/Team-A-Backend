@@ -18,15 +18,15 @@ webServer.get("/user", (request, response) => {
   response.json(user);
 });
 
-webServer.post("/insert", (request, response) => {
+webServer.post("/newuser", (request, response) => {
 
   const name = request.body.name;
-  const email = request.body.name;
-  const username = request.body.name;
-  const password = request.body.name;
+  const fullname = request.body.fullname;
+  const email = request.body.email;
+  const username = request.body.username;
+  const password = request.body.password;
   
-  
-  user.push({name, email, username, password });
+  user.push({name, fullname, email, username, password });
   response.send("Create User Success");
 });
 

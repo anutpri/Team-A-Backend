@@ -33,7 +33,10 @@ const activitySchema = new Schema({
         type: Date,
         required: true
       },
-      
+      fullname: {
+        type: String,
+        ref:"User"
+        },
     });
 
 const Activity = mongoose.model('Activity', activitySchema);
