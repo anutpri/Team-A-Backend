@@ -1,1 +1,0 @@
-import Activity from '../models/activity.schema.js';
