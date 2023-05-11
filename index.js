@@ -2,10 +2,12 @@ import express from "express";
 import mongoose from 'mongoose';
 import userRouter from "./src/routers/users.js";
 import activityRouter from "./src/routers/activities.js";
+import cors from "cors";
 
 const port = 8080;
 const ipAddress = "127.0.0.1";
 const app = express();
+app.use(cors());
 
 // Middlewares
 app.use(express.json());
