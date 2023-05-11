@@ -10,7 +10,7 @@ const activitySchema = new mongoose.Schema(
     // start_date_time: { type: Date, required: true },
     // finish_date_time: { type: Date, required: true },
     // fullname: { type: String, ref:"User" },
-  }
+  },
     // {
     //   statics: {
     //     findByType: async function (activity_type) {
