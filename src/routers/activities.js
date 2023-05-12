@@ -45,8 +45,21 @@ activityRouter.post("/", async (req, res) => {
 
 activityRouter.patch("/:activityId", async (req, res) => {
   try {
-    // set update logic soon
-    res.send("update");
+    const { activityId } = req.params;
+    const { activity_name } = req.body;
+    const { activity_type } = req.body;
+    const updatedActivity = await activityModel.findOneAndUpdate(
+      { _id: activityId },
+      { activity_name },
+      { activity_type },
+      { new: true }
+    );
+
+    if (!updatedActivity) {
+      return res.status(404).send("Activity not found");
+    }
+
+    return res.send(updatedActivity.toJSON());
   } catch (error) {
     console.error("Error updating activity:", error);
     res.status(500).send("Internal Server Error");
