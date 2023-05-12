@@ -1,5 +1,7 @@
 import express from "express";
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
 import userRouter from "./src/routers/users.js";
 import activityRouter from "./src/routers/activities.js";
 import cors from "cors";
@@ -16,6 +18,7 @@ app.use("/activities", activityRouter);
 app.use("/users", userRouter);
 
 const start = async () => {
+  try {
   // DO NOT COMMIT/PUSH USERNAME AND PASSWORD TO Github
   await mongoose.connect(process.env.DATABASE_URI, {
     dbName: process.env.DATABASE_NAME,
@@ -29,6 +32,10 @@ const start = async () => {
       console.log(`Web Application Server is running on ${ipAddress} port ${port}`);
       console.log(`Address: http://${ipAddress}:${port}`);
       });
+
+    } catch (error) {
+      console.error("Error connecting to the database or starting the server:", error);
+    }
 };
 
 start();
