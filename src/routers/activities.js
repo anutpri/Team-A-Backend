@@ -46,23 +46,31 @@ activityRouter.post("/", async (req, res) => {
 activityRouter.patch("/:activityId", async (req, res) => {
   try {
     const { activityId } = req.params;
-    const { activity_name } = req.body;
-    // const { activity_type } = req.body;
-    // const { distance } = req.body;
-    // const { duration_time } = req.body;
-    // const { start_date_time } = req.body;
-    // const { finish_date_time } = req.body;
-    // const { fullname } = req.body;
-
+    const { activity_name, 
+            description,
+            username,
+            activity_type,
+            distance,
+            duration_time,
+            start_date_time,
+            finish_date_time,
+            fullname
+          } = req.body;
+    
+    
     const updatedActivity = await activityModel.findOneAndUpdate(
       { _id: activityId },
-      { activity_name },
-      // { activity_type },
-      // { distance },
-      // { duration_time },
-      // { start_date_time },
-      // { finish_date_time },
-      // { fullname },
+      { activity_name, 
+        description,
+        username,
+        activity_type,
+        distance,
+        duration_time,
+        start_date_time,
+        finish_date_time,
+        fullname
+      },
+      
       { new: true }
     );
 
