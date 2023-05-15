@@ -87,8 +87,15 @@ activityRouter.patch("/:activityId", async (req, res) => {
 
 activityRouter.delete("/:activityId", async (req, res) => {
   try {
-    // set delete logic soon
-    res.send("delete");
+    const { activityId } = req.params;
+    
+    const deletedActivity = await activityModel.findOneAndDelete({ _id: activityId });
+
+    if (!deletedActivity) {
+      return res.status(404).send("Activity not found");
+    }
+
+    return res.send(deletedActivity.toJSON());
   } catch (error) {
     console.error("Error deleting activity:", error);
     res.status(500).send("Internal Server Error");
