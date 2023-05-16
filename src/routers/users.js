@@ -34,6 +34,7 @@ userRouter.post("/", async (req, res) => {
     if (validateResult) {
       return res.status(400).send(validateResult);
     }
+
     await user.save();
     return res.send(user.toJSON());
   } catch (error) {
