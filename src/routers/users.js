@@ -13,6 +13,7 @@ userRouter.get("/", async (req, res) => {
   }
 });
 
+
 userRouter.get("/:userId", async (req, res) => {
   try {
     console.log(req.params);
@@ -27,6 +28,34 @@ userRouter.get("/:userId", async (req, res) => {
   }
 });
 
+userRouter.get("/username/:username", async (req, res) => {
+  try {
+    console.log(req.params);
+    const userName = await UserModel.findOne({ username: req.params.username });
+    if (!userName) {
+      return res.status(404).end();
+    }
+    res.json(userName.toJSON());
+  } catch (error) {
+    console.error("Error retrieving user:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+userRouter.get("/email/:email", async (req, res) => {
+  try {
+    console.log(req.params);
+    const userEmail = await UserModel.findOne({ email: req.params.email });
+    if (!userEmail) {
+      return res.status(404).end();
+    }
+    res.json(userEmail.toJSON());
+  } catch (error) {
+    console.error("Error retrieving user:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 userRouter.post("/", async (req, res) => {
   try {
     const user = new UserModel(req.body);
@@ -34,6 +63,7 @@ userRouter.post("/", async (req, res) => {
     if (validateResult) {
       return res.status(400).send(validateResult);
     }
+
     await user.save();
     return res.send(user.toJSON());
   } catch (error) {
