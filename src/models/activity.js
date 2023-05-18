@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const activitySchema = new mongoose.Schema(
   {
     activity_name: { type: String, required: true },
-    description: String,
+    description: { type: String },
     username: { type: String, required: true, ref:"user"},
     activity_type: { type: String, enum: ['Running', 'Walking', 'Bike cycling', 'Weight training', 'Dancing'], required: true},
     distance: { type: Number }, 
