@@ -28,6 +28,22 @@ activityRouter.get("/:activityId", async (req, res) => {
   }
 });
 
+activityRouter.get("/username/:username", async (req, res) => {
+  try {
+    const username = req.params.username;
+    const activities = await activityModel.find({ username });
+    
+    if (activities.length === 0) {
+      return res.status(404).json({ message: "No activities found for the provided username" });
+    }
+    
+    res.json(activities);
+  } catch (error) {
+    console.error("Error retrieving activities:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 activityRouter.post("/", async (req, res) => {
   try {
     const activity = new activityModel(req.body);
@@ -46,29 +62,28 @@ activityRouter.post("/", async (req, res) => {
 activityRouter.patch("/:activityId", async (req, res) => {
   try {
     const { activityId } = req.params;
-    const { activity_name, 
+    const { 
+            activityName,
             description,
             username,
-            activity_type,
+            startDateTime,
+            finishDateTime,
+            activityType,
+            durationTime,
             distance,
-            duration_time,
-            start_date_time,
-            finish_date_time,
-            fullname
           } = req.body;
     
     
     const updatedActivity = await activityModel.findOneAndUpdate(
       { _id: activityId },
-      { activity_name, 
+      { activityName,
         description,
         username,
-        activity_type,
+        startDateTime,
+        finishDateTime,
+        activityType,
+        durationTime,
         distance,
-        duration_time,
-        start_date_time,
-        finish_date_time,
-        fullname
       },
       
       { new: true }
