@@ -28,6 +28,20 @@ activityRouter.get("/:activityId", async (req, res) => {
   }
 });
 
+activityRouter.get("/username/:username", async (req, res) => {
+  try {
+    console.log(req.params);
+    const activity = await activityModel.findOne({ username: req.params.username });
+    if (!activity) {
+      return res.status(404).end();
+    }
+    res.json(activity.toJSON());
+  } catch (error) {
+    console.error("Error retrieving activity:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 activityRouter.post("/", async (req, res) => {
   try {
     const activity = new activityModel(req.body);
