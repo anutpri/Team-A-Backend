@@ -30,14 +30,16 @@ activityRouter.get("/:activityId", async (req, res) => {
 
 activityRouter.get("/username/:username", async (req, res) => {
   try {
-    console.log(req.params);
-    const activity = await activityModel.findOne({ username: req.params.username });
-    if (!activity) {
-      return res.status(404).end();
+    const username = req.params.username;
+    const activities = await activityModel.find({ username });
+    
+    if (activities.length === 0) {
+      return res.status(404).json({ message: "No activities found for the provided username" });
     }
-    res.json(activity.toJSON());
+    
+    res.json(activities);
   } catch (error) {
-    console.error("Error retrieving activity:", error);
+    console.error("Error retrieving activities:", error);
     res.status(500).send("Internal Server Error");
   }
 });
