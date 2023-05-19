@@ -76,8 +76,6 @@ userRouter.patch("/:userId", async (req, res) => {
   try {
     const { userId } = req.params;
     const { 
-            name,
-            fullname,
             email,
             username,
             password,
@@ -90,8 +88,6 @@ userRouter.patch("/:userId", async (req, res) => {
     const updatedUser = await UserModel.findOneAndUpdate(
       { _id: userId },
       { 
-        name,
-        fullname,
         email,
         username,
         password,
