@@ -8,6 +8,8 @@ import cors from "cors";
 
 const port = process.env.DATABASE_PORT;
 const ipAddress = process.env.DATABASE_IP;
+const user = process.env.DATABASE_USER
+const pass = process.env.DATABASE_PASS
 const app = express();
 app.use(cors());
 
@@ -20,7 +22,7 @@ app.use("/users", userRouter);
 const start = async () => {
   try {
   // DO NOT COMMIT/PUSH USERNAME AND PASSWORD TO Github
-  await mongoose.connect(process.env.DATABASE_URI, {
+  await mongoose.connect(`mongodb+srv://${user}:${pass}@cluster0.erdzem4.mongodb.net/?retryWrites=true&w=majority`, {
     dbName: process.env.DATABASE_NAME,
     writeConcern: "majority",
     retryWrites: true,
