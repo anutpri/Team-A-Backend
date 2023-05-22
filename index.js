@@ -24,8 +24,8 @@ const start = async () => {
     dbName: process.env.DATABASE_NAME,
     writeConcern: "majority",
     retryWrites: true,
-    user: process.env.DATABASE_USER,
-    pass: process.env.DATABASE_PASS,
+    // user: process.env.DATABASE_USER,
+    // pass: process.env.DATABASE_PASS,
   });
 
   app.listen(port, ipAddress, () => {
