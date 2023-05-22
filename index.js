@@ -6,7 +6,7 @@ import userRouter from "./src/routers/users.js";
 import activityRouter from "./src/routers/activities.js";
 import cors from "cors";
 
-const port = process.env.PORT;
+const port = process.env.DATABASE_PORT;
 const ipAddress = process.env.DATABASE_IP;
 const user = process.env.DATABASE_USER;
 const pass = process.env.DATABASE_PASS;
