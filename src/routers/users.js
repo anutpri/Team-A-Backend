@@ -72,4 +72,41 @@ userRouter.post("/", async (req, res) => {
   }
 });
 
+userRouter.patch("/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { 
+            email,
+            username,
+            password,
+            birthdate,
+            weight,
+            height,
+          } = req.body;
+    
+    
+    const updatedUser = await UserModel.findOneAndUpdate(
+      { _id: userId },
+      { 
+        email,
+        username,
+        password,
+        birthdate,
+        weight,
+        height,
+      },
+      
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).send("User not found");
+    }
+    return res.send(updatedUser.toJSON());
+  } catch (error) {
+    console.error("Error updating User:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 export default userRouter;
