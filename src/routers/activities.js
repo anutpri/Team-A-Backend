@@ -6,7 +6,7 @@ const activityRouter = express.Router();
 
 activityRouter.get("/", async (req, res) => {
   try {
-    const activities = await activityModel.find();
+    const activities = await activityModel.find().sort({ _id: -1 });
     res.send(activities.map((act) => act.toJSON()));
   } catch (error) {
     console.error("Error retrieving activities:", error);
