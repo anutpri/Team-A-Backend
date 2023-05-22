@@ -6,8 +6,8 @@ import userRouter from "./src/routers/users.js";
 import activityRouter from "./src/routers/activities.js";
 import cors from "cors";
 
-const port = 8080;
-const ipAddress = "127.0.0.1";
+const port = process.env.DATABASE_PORT;
+const ipAddress = process.env.DATABASE_IP;
 const app = express();
 app.use(cors());
 
