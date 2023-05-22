@@ -8,8 +8,9 @@ import cors from "cors";
 
 const port = process.env.PORT;
 const ipAddress = process.env.DATABASE_IP;
-const user = process.env.DATABASE_USER
-const pass = process.env.DATABASE_PASS
+const user = process.env.DATABASE_USER;
+const pass = process.env.DATABASE_PASS;
+const dbName = process.env.DATABASE_NAME;
 const app = express();
 app.use(cors());
 
@@ -22,13 +23,7 @@ app.use("/users", userRouter);
 const start = async () => {
   try {
   // DO NOT COMMIT/PUSH USERNAME AND PASSWORD TO Github
-  await mongoose.connect(`mongodb+srv://${user}:${pass}@cluster0.erdzem4.mongodb.net/?retryWrites=true&w=majority`, {
-    dbName: process.env.DATABASE_NAME,
-    writeConcern: "majority",
-    retryWrites: true,
-    // user: process.env.DATABASE_USER,
-    // pass: process.env.DATABASE_PASS,
-  });
+  await mongoose.connect(`mongodb+srv://${user}:${pass}@cluster0.erdzem4.mongodb.net/${dbName}?retryWrites=true&w=majority`);
 
   app.listen(port,  () => {
       console.log(`Web Application Server is running on ${ipAddress} port ${port}`);
