@@ -31,7 +31,7 @@ activityRouter.get("/:activityId", async (req, res) => {
 activityRouter.get("/username/:username", async (req, res) => {
   try {
     const username = req.params.username;
-    const activities = await activityModel.find({ username });
+    const activities = await activityModel.find({ username }).sort({ _id: -1 });
     
     if (activities.length === 0) {
       return res.status(404).json({ message: "No activities found for the provided username" });
